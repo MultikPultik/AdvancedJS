@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f6f6f6;
+}
+
+header {
+    /*width: 1200px;*/
+    margin: 0 auto;
+
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    max-width: 1550px;
+
+}
+
+.header-top {
+    width: 100%;
+    min-height: 60px;
+    text-align: center;
+    background: #30539c;
+    margin: 30px 0;
+    font-size: 30px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalog {
+    width: inherit;
+    margin: 0 30px;
+
+}
+
+.catalog-header,
+.cart-header {
+    font-size: 40px;
+    margin-left: 10px;
+    border-bottom: solid 1px black;
+    margin-bottom: 30px;
+}
+
+.products {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    margin: 10px;
+    padding: 10px;
+}
+
+.product-item p {
+    font-size: 25px;
+}
+
+.by-btn,
+.btn-cart {
+    background: inherit;
+    color: #333;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    font-weight: normal;
+    height: 35px;
+    outline: none;
+}
+
+.by-btn:hover,
+.btn-cart:hover {
+    border: 1px solid #30539c;
+    cursor: pointer;
+}
+
+.cart {
+    min-width: 300px;
+}
