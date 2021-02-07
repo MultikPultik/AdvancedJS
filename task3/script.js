@@ -6,67 +6,69 @@
 // d. Текст произвольный.
 // e. Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой и сообщить пользователю об ошибке.
 
+'use strict';
+class FormFeedBack {
+    constructor(name, phone, mail, text) {
+        this.name = this.getElement(name);
+        this.phone = this.getElement(phone);
+        this.mail = this.getElement(mail);
+        this.text = this.getElement(text);
 
-// var formName = document.getElementById('name');
-var formName = document.querySelector('form');
+        this.patterns = {
+            name: /^[a-zа-я]+$/i,
+            phone: /^\+7\(\d{3}\)\d{3}-\d{4}$/,
+            mail: /^[\w._-]+@\w+\.[a-z]{2,4}$/i,
+        };
+    }
+    getElement(element) {
+        return document.getElementById(`${element}`);
+    }
+    getName() {
+        return this.name.value;
+    }
+    getPhone() {
+        return this.phone.value;
+    }
+    getMail() {
+        return this.mail.value;
+    }
+    getText() {
+        return this.text.value;
+    }
 
-// console.log(formName.value);
-console.log(formName);
-    //console.log(str.replace(/ '\s...'/, '"'));
-    // console.log(str.replace(/\B'|'\B/g, '"'));
 
-    'use strict';
-
-class ProductInfo {
-    constructor(element) {
-        this.name = element.dataset.name;
-        this.price = element.dataset.price;
-        this.calories = element.dataset.calories;
+    validation() {
+        let str = this.getName();
+        if (this.patterns.name.test(str)) {
+            this.name.classList.remove('is-invalid');
+            this.name.classList.add('is-valid');
+        } else {
+            this.name.classList.add('is-invalid');
+            this.name.classList.remove('is-valid');
+        }
+        str = this.getPhone();
+        if (this.patterns.phone.test(str)) {
+            this.phone.classList.remove('is-invalid');
+            this.phone.classList.add('is-valid');
+        } else {
+            this.phone.classList.add('is-invalid');
+            this.phone.classList.remove('is-valid');
+        }
+        str = this.getMail();
+        if (this.patterns.mail.test(str)) {
+            this.mail.classList.remove('is-invalid');
+            this.mail.classList.add('is-valid');
+        } else {
+            this.mail.classList.add('is-invalid');
+            this.mail.classList.remove('is-valid');
+        }
+    }
+    send() {
+        this.validation();
     }
 }
 
-class Hamburger {
-    constructor(size, staffing, extra) {
-        this.size = new ProductInfo(this.getSize(size));
-        this.staffing = new ProductInfo(this.getStaffing(staffing));
-        this.extra = this.getExtra(extra);
-    }
-    getSize(name) {
-        return document.querySelector(`input[data-name="${name}"]:checked`);
-    }
-    getStaffing(name) {
-        return document.querySelector(`input[data-name="${name}"]:checked`);
-    }
-    getExtra(name) {
-        let el = [...document.querySelectorAll(`input[data-name="${name}"]:checked`)];
-        let result = [];
-        el.forEach(el => (result.push(new ProductInfo(el))));
-        return result;
-    }
-    calculatePrice() {
-        let sum = (+this.size.price) + (+this.staffing.price) + this.extra.reduce((prev, curr) => { return prev + (+curr.price); }, 0);
-        return sum;
-    }
-    calculateCalories() {
-        let sum = (+this.size.calories) + (+this.staffing.calories) + this.extra.reduce((prev, curr) => { return prev + (+curr.calories); }, 0);
-        return sum;
-    }
-
-    render() {
-        document.getElementById('summa').innerHTML = '';
-        document.getElementById('summa').insertAdjacentHTML(
-            'beforeend', 
-            `<p class="card-text">Цена: ${this.calculatePrice()} рублей</p>`
-        );
-        document.getElementById('summa').insertAdjacentHTML(
-            'beforeend', 
-            `<p class="card-text">Число калорий: ${this.calculateCalories()}</p>`
-        );
-    }
-
-}
-
-document.getElementById('calc').addEventListener('click', () => {
-    const hamburger = new Hamburger('size', 'staffing', 'extra');
-    hamburger.render();
+document.getElementById('submit').addEventListener('click', () => {
+    const formFeedBack = new FormFeedBack('name', 'phone', 'email', 'text');
+    formFeedBack.send();
 });

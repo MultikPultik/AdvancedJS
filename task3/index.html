@@ -17,32 +17,41 @@
                 <form>
                     <div class="form-group">
                       <label for="name">Ваше имя</label>
-                      <input type="text" class="form-control" id="name" placeholder="Иван" value="ff">
+                      <input type="text" class="form-control" id="name" placeholder="Иван">
                       <div class="invalid-feedback">
                         Имя должно содержать только буквы.
+                      </div>
+                      <div class="valid-feedback">
+                        Данные введены правильно!
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="phone">Ваш телефон</label>
-                      <input type="tel" class="form-control" id="phone" placeholder="+7(000)000-0000">
+                      <input type="text" class="form-control" id="phone" placeholder="+7(000)000-0000">
                       <div class="invalid-feedback">
                         Телефон должен быть в формате +7(000)000-0000.
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="mail">Ваша почта</label>
-                      <input type="email" class="form-control" id="mail" placeholder="mymail@mail.ru">
-                      <div class="invalid-feedback">
-                        E-mail должен быть в формате  mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+                      <div class="valid-feedback">
+                        Данные введены правильно!
                       </div>
                     </div>
                     <div class="form-group">
-                        <label for="Textarea">Ваше сообщение</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Здесь можете оставить Ваши пожелания..."></textarea>
+                      <label for="email">Ваша почта</label>
+                      <input type="text" class="form-control" id="email" placeholder="mymail@mail.ru">
+                      <div class="invalid-feedback">
+                        E-mail должен быть в формате  mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+                      </div>
+                      <div class="valid-feedback">
+                        Данные введены правильно!
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Ваше сообщение</label>
+                        <textarea class="form-control" id="text" rows="3" placeholder="Здесь можете оставить Ваши пожелания..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                  </form>
+                </form>
+                <button id="submit" class="btn btn-primary">Отправить</button>
             </div>
           </div>
     </div>
