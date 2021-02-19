@@ -110,7 +110,7 @@ app.delete('/api/cart/:id', (req, res) => {
  * @type {string|number}
  */
 // const port = process.env.PORT || 3000;
-const port = 3000; // чтобы не смущало process.env.PORT (если не стартует на 3000, то меняем на другой 8080 или 8888)
+const port = 8080; // чтобы не смущало process.env.PORT (если не стартует на 3000, то меняем на другой 8080 или 8888)
 app.listen(port, () => {
   console.log(`Listening ${port} port`);
 });
