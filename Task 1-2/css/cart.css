@@ -96,6 +96,10 @@ nav ul li a:hover {
   vertical-align: middle;
 }
 
+.shopping-cart .cart-item img {
+  width: 70px;
+}
+
 .shopping-cart:after {
   bottom: 100%;
   left: 89%;
