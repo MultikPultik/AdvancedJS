@@ -54,12 +54,14 @@ class ProductItem {
     }
 }
 
-class ProductList {
+class ProductsList {
     constructor() {
-        this.products = [];
+        this.productsFromServer = [];
+        this.fetchProducts();
+        this.render();
     }
     fetchProducts() {
-        this.products = [
+        this.productsFromServer = [
             { id: 1, title: 'Notebook', price: 20000, img: 'https://fakeimg.pl/250x250/282828/eae0d0/' },
             { id: 2, title: 'Mouse', price: 1500, img: 'https://fakeimg.pl/250x250/282828/eae0d0/' },
             { id: 3, title: 'Keyboard', price: 5000, img: 'https://fakeimg.pl/250x250/282828/eae0d0/' },
@@ -68,23 +70,21 @@ class ProductList {
     }
     render() {
         let contentHTML = '';
-        this.products.forEach(product => {
+        this.productsFromServer.forEach(product => {
             const item = new ProductItem(product.id, product.title, product.price, product.img);
             contentHTML += item.getHTML();
         });
         document.querySelector('.products').insertAdjacentHTML('beforeend', contentHTML);
     }
     sum() {
-        return this.products.reduce((accum, curr) => {
+        return this.productsFromServer.reduce((accum, curr) => {
            return accum + curr.price;
         }, 0);
     }
 }
 
-const listProduct = new ProductList();
-listProduct.fetchProducts();
-listProduct.render();
+const listProduct = new ProductsList();
 
 //Информацию о суммарной стоимости выводим в консоль
-console.log(listProduct.sum()); //Сумма всех товаров
+console.log('Стоимость всех товаров в корзине - ', listProduct.sum()); //Сумма всех товаров
 
