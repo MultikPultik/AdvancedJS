@@ -1,5 +1,6 @@
 // 1. Переделайте makeGETRequest() так, чтобы она использовала промисы.
 // 2. Добавьте в соответствующие классы методы добавления товара в корзину, удаления товара из корзины и получения списка товаров корзины.
+// 3* Переделайте GoodsList так, чтобы fetchGoods() возвращал промис, а render() вызывался в обработчике этого промиса.
 
 // 'use strict';
 
@@ -13,31 +14,49 @@ class BaseCatalog {
         this.url = url;
     }
 
+    // getData(url) {
+    //     return fetch(`${API + url}`)
+    //         .then(response => response.json())
+    //         .catch(error => {
+    //             console.log('Ошибка получения данных от сервера');
+    //         })
+    // }
+
+    // переделать в ДЗ на промисы.НЕ ИСПОЛЬЗОВАТЬ fetch!!!
     getData(url) {
-        return fetch(`${API + url}`)
-            .then(response => response.json())
-            .catch(error => {
-                console.log('Ошибка получения данных от сервера');
-            })
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', `${API + url}`, true);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status !== 200) {
+                        reject('Ошибка получения данных от сервера');
+                    } else {
+                        resolve(JSON.parse(xhr.responseText));
+                    }
+                }
+            };
+            xhr.send();
+        })
     }
 }
-// переделать в ДЗ на промисы. НЕ ИСПОЛЬЗОВАТЬ fetch!!!
-let getRequest = (API) => {
-    return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', API, true);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                if (xhr.status !== 200) {
-                    reject('Error!!!');
-                } else {
-                    resolve(xhr.responseText);
-                }
-            }
-        };
-        xhr.send();
-    })
-}
+// // переделать в ДЗ на промисы. НЕ ИСПОЛЬЗОВАТЬ fetch!!!
+// let getRequest = (API) => {
+//     return new Promise((resolve, reject) => {
+//         let xhr = new XMLHttpRequest();
+//         xhr.open('GET', API, true);
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState === 4) {
+//                 if (xhr.status !== 200) {
+//                     reject('Ошибка получения данных от сервера');
+//                 } else {
+//                     resolve(xhr.responseText);
+//                 }
+//             }
+//         };
+//         xhr.send();
+//     })
+// }
 
 class Item {
     constructor(el, linkImg = 'https://fakeimg.pl/200x200/282828/eae0d0/') {
@@ -69,8 +88,10 @@ class Catalog extends BaseCatalog {
     }
 
     init() {
-        this.fetchProducts();
-        this.render();
+        this.fetchProducts()
+            .then(() => {
+                this.render();
+            });
         document.querySelector(this.container).addEventListener('click', (ev) => {
             if (ev.target.classList.contains('by-btn')) {
                 this.cart.addProduct(ev.target);
@@ -79,13 +100,14 @@ class Catalog extends BaseCatalog {
     }
 
     fetchProducts() {
-        this.getData(this.url)
-            .then(data => {
-
-                console.log('Данные от сервера для каталога - ', data);
-                this.catalogGoods = data;
-                this.render();
-            });
+        return new Promise((resolve, reject) => {
+            this.getData(this.url)
+                .then(data => {
+                    console.log('Данные от сервера для каталога - ', data);
+                    this.catalogGoods = data;
+                    resolve();
+                });
+        })
     }
 
     render() {
@@ -142,7 +164,7 @@ class Cart extends BaseCatalog {
             const item = new CartItem(element);
             contentHTML += item.getHTML();
             document.querySelector(this.container).insertAdjacentHTML('beforeend', contentHTML);
-            
+
             document.querySelector('.total-price').textContent = this.sum();
             this.updateBadge();
         });
@@ -202,7 +224,7 @@ class Cart extends BaseCatalog {
                         document.querySelector(this.container).insertAdjacentHTML('beforeend', contentHTML);
                         this.cartGoods.push(product);
                         console.log(this.cartGoods);
-                        
+
                         document.querySelector('.total-price').textContent = this.sum();
                         this.updateBadge();
                     }
@@ -225,7 +247,7 @@ class Cart extends BaseCatalog {
                         this.cartGoods.splice(index, 1);
                         console.log('удален товар с id =', dataId);
                         console.log('теперь в корзине - ', this.cartGoods);
-                        
+
                         document.querySelector('.total-price').textContent = this.sum();
                         this.updateBadge();
                     }
