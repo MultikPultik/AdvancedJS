@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .card {
+      -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+      box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+  </style>
+  <title>HomeWork for Lesson-4</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card w-50 mx-auto mt-5">
+      <div class="card-header">
+        Форма обратной связи
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" class="form-control" id="name" placeholder="Иван">
+            <div class="invalid-feedback">
+              Имя должно содержать только буквы и начинаться с заглавной буквы.
+            </div>
+            <div class="valid-feedback">
+              Данные введены правильно!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Ваш телефон</label>
+            <input type="text" class="form-control" id="phone" placeholder="+7(000)000-0000">
+            <div class="invalid-feedback">
+              Телефон должен быть в формате +7(000)000-0000.
+            </div>
+            <div class="valid-feedback">
+              Данные введены правильно!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Ваша почта</label>
+            <input type="text" class="form-control" id="email" placeholder="mymail@mail.ru">
+            <div class="invalid-feedback">
+              E-mail должен быть в формате mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+            </div>
+            <div class="valid-feedback">
+              Данные введены правильно!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="text">Ваше сообщение</label>
+            <textarea class="form-control" id="text" rows="3"
+              placeholder="Здесь можете оставить Ваши пожелания..."></textarea>
+          </div>
+
+        </form>
+        <button id="submit" class="btn btn-primary">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
