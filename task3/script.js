@@ -15,60 +15,76 @@ class FormFeedBack {
         this.text = this.getElement(text);
 
         this.patterns = {
-            name: /^[a-zа-я]+$/i,
+            name: /^[A-ZА-Я][a-zа-я]+$/,
             phone: /^\+7\(\d{3}\)\d{3}-\d{4}$/,
             mail: /^[\w._-]+@\w+\.[a-z]{2,4}$/i,
         };
     }
-    getElement(element) {
-        return document.getElementById(`${element}`);
+    getElement(el) {
+        return document.getElementById(`${el}`);
     }
-    getName() {
-        return this.name.value;
-    }
-    getPhone() {
-        return this.phone.value;
-    }
-    getMail() {
-        return this.mail.value;
-    }
-    getText() {
-        return this.text.value;
+    getValue(el) {
+        return el.value;
     }
 
-
-    validation() {
-        let str = this.getName();
+    validName(){
+        let str = this.getValue(this.name);
         if (this.patterns.name.test(str)) {
             this.name.classList.remove('is-invalid');
             this.name.classList.add('is-valid');
+            return true;
         } else {
             this.name.classList.add('is-invalid');
             this.name.classList.remove('is-valid');
+            return false;
         }
-        str = this.getPhone();
+    }
+    validPhone(){
+        let str = this.getValue(this.phone);
         if (this.patterns.phone.test(str)) {
             this.phone.classList.remove('is-invalid');
             this.phone.classList.add('is-valid');
+            return true;
         } else {
             this.phone.classList.add('is-invalid');
             this.phone.classList.remove('is-valid');
+            return false;
         }
-        str = this.getMail();
+    }
+    validMail(){
+        let str = this.getValue(this.mail);
         if (this.patterns.mail.test(str)) {
             this.mail.classList.remove('is-invalid');
             this.mail.classList.add('is-valid');
+            return true;
         } else {
             this.mail.classList.add('is-invalid');
             this.mail.classList.remove('is-valid');
+            return false;
         }
+    }
+    validation() {
+        if (this.validName() && this.validPhone() && this.validMail()) {
+            console.log('Отправлено на сервер');
+        } else {
+            console.log('Данные не валидны');
+        }
+        
+        
     }
     send() {
         this.validation();
     }
 }
 
+const formFeedBack = new FormFeedBack('name', 'phone', 'email', 'text');
+
 document.getElementById('submit').addEventListener('click', () => {
-    const formFeedBack = new FormFeedBack('name', 'phone', 'email', 'text');
     formFeedBack.send();
+});
+
+document.getElementsByClassName('card-body')[0].addEventListener('focusout', (ev) => {
+    if (ev.target.id === 'name') {formFeedBack.validName()};
+    if (ev.target.id === 'phone') {formFeedBack.validPhone()};
+    if (ev.target.id === 'email') {formFeedBack.validMail()};
 });
