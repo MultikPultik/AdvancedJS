@@ -23,9 +23,9 @@ new Vue({
         cartUrl: 'getBasket.json',
         addToBasket: 'addToBasket.json',
         deleteFromBasket: 'deleteFromBasket.json',
-        catalogGoods: [], //товары в каталоге
-        cartGoods: [],
-        searchGoods: [],   //товары в корзине
+        catalogGoods: [],   //товары в каталоге
+        cartGoods: [],      //товары в корзине
+        searchGoods: [],    //найденные товары
     },
     methods: {
         getJson(url) {
@@ -96,14 +96,14 @@ new Vue({
                     this.catalogGoods.push(el);
                 }
                 this.searchGoods = [...this.catalogGoods]; //делаем копию
+                if (this.catalogGoods.length === 0) {
+                    this.isCatalogEmpty = true;     //Выводим сообщение - нет данных от сервера
+                }
             })
             .catch(error => {
-                if (error) {
-                    this.isCatalogEmpty = true;
-                    console.log(error);
-                }
+                console.log('Ошибка чтения данных с сервера.\n', error);
             });
-        
+
         //обновляем корзину товаров данными из сервера
         this.getJson(`${API + this.cartUrl}`)
             .then(data => {
