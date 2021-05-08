@@ -1,12 +1,6 @@
-$main-color: #6394F8;
-$light-text: #ABB0BE;
-
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
-
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
-
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
-
 *,
 *:before,
 *:after {
@@ -16,7 +10,6 @@ $light-text: #ABB0BE;
 body {
   font: "Lato", Arial, sans-serif;
   background: #6394F8;
-  //background: #191921;
   /* color: blanchedalmond; */
 }
 
@@ -25,41 +18,38 @@ body {
 }
 
 .main-color-text {
-  color: $main-color;
+  color: #6394F8;
 }
 
 nav {
   padding: 20px 0 40px 0;
   background: #F8F8F8;
   font-size: 16px;
+}
 
-  .navbar-left {
-    font-size: 16px;
-    line-height: 1rem;
-    float: left;
-    font-size: 40px;
-  }
+nav .navbar-left {
+  font-size: 16px;
+  line-height: 1rem;
+  float: left;
+  font-size: 40px;
+}
 
-  .navbar-right {
-    float: right;
-  }
+nav .navbar-right {
+  float: right;
+}
 
-  ul {
+nav ul li {
+  display: inline;
+  padding-left: 20px;
+}
 
-    li {
-      display: inline;
-      padding-left: 20px;
+nav ul li a {
+  color: #777777;
+  text-decoration: none;
+}
 
-      a {
-        color: #777777;
-        text-decoration: none;
-
-        &:hover {
-          color: black;
-        }
-      }
-    }
-  }
+nav ul li a:hover {
+  color: black;
 }
 
 .container {
@@ -89,27 +79,26 @@ nav {
   border-radius: 3px;
   padding: 20px;
   z-index: 100;
-  display: none;
-
-  .shopping-cart-header {
-    border-bottom: 1px solid #E8E8E8;
-    padding-bottom: 15px;
-
-    .shopping-cart-total {
-      float: right;
-    }
-  }
-
-  .table td,
-  .table th {
-    vertical-align: middle;
-  }
-
-  .cart-item img{
-    width: 70px;
-  }
+  display: block;
 }
 
+.shopping-cart .shopping-cart-header {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 15px;
+}
+
+.shopping-cart .shopping-cart-header .shopping-cart-total {
+  float: right;
+}
+
+.shopping-cart .table td,
+.shopping-cart .table th {
+  vertical-align: middle;
+}
+
+.shopping-cart .cart-item img {
+  width: 70px;
+}
 
 .shopping-cart:after {
   bottom: 100%;
@@ -133,7 +122,7 @@ nav {
 }
 
 .button {
-  background: $main-color;
+  background: #6394F8;
   color: white;
   text-align: center;
   padding: 12px;
@@ -142,10 +131,10 @@ nav {
   border-radius: 3px;
   font-size: 16px;
   margin: 25px 0 15px 0;
+}
 
-  &:hover {
-    background: lighten($main-color, 3%);
-  }
+.button:hover {
+  background: #729ef9;
 }
 
 .clearfix:after {
@@ -153,7 +142,6 @@ nav {
   display: table;
   clear: both;
 }
-
 
 .header-top {
   width: 100%;
@@ -171,7 +159,6 @@ nav {
 .catalog {
   width: inherit;
   margin: 0 30px;
-
 }
 
 .catalog-header {
@@ -213,3 +200,4 @@ nav {
   border: 1px solid #30539c;
   cursor: pointer;
 }
+/*# sourceMappingURL=cart.css.map */
