@@ -45,7 +45,7 @@ nav {
   }
 
   ul {
-
+    margin-bottom: 0;
     li {
       display: inline;
       padding-left: 20px;
@@ -64,7 +64,7 @@ nav {
 
 .container {
   position: relative;
-  margin: auto;
+  margin: 5px auto;
 }
 
 .badge {
@@ -83,7 +83,7 @@ nav {
 .shopping-cart {
   position: absolute;
   right: 10px;
-  margin: 45px -10px;
+  margin: 30px -10px;
   background: whitesmoke;
   width: 520px;
   border-radius: 3px;
@@ -170,13 +170,10 @@ nav {
 
 .catalog {
   width: inherit;
-  margin: 0 30px;
-
 }
 
 .catalog-header {
   font-size: 40px;
-  margin-left: 10px;
   border-bottom: solid 1px black;
   margin-bottom: 30px;
 }

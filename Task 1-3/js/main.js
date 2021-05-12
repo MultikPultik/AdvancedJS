@@ -11,34 +11,35 @@ new Vue({
     el: '#app',
     data: {
         price: '',
-        search: '',
+        product: [],
         isCatalogEmpty: false,
         imgCatalogUrl: 'https://fakeimg.pl/200x200/282828/eae0d0/',
         catalogUrl: 'catalogData.json',
+        addToBasket: 'addToBasket.json',
         catalogGoods: [],   //товары в каталоге
-        searchGoods: [],    //найденные товары
+        TsearchGoods: [],    //найденные товары из компонента Search
+        TcartGoods: [],      //найденные товары в корзине
     },
+
     methods: {
         getJson(url) {
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
                     console.log(error);
-                })
+                });
         },
-        clickSearch() {
-            this.searchGoods = this.searchProduct(this.search);
+        getFromSearch(data) {
+            this.TsearchGoods = data;
         },
-        
-        searchProduct(str) {
-            return this.catalogGoods.filter(el => {
-                let s = new RegExp(str, "gim");
-                return (s.test(el.product_name));
-            })
+        getFromCart(data) {
+            this.TcartGoods = data;
         },
-
-        
+        addProduct(item) {
+          this.product = item;  
+        },
     },
+
     created() {
         //обновляем каталог товаров данными из сервера
         this.getJson(`${API + this.catalogUrl}`)
@@ -46,7 +47,7 @@ new Vue({
                 for (let el of data) {
                     this.catalogGoods.push(el);
                 }
-                this.searchGoods = [...this.catalogGoods]; //делаем копию
+                this.TsearchGoods = [...this.catalogGoods]; //делаем копию
                 if (this.catalogGoods.length === 0) {
                     this.isCatalogEmpty = true;     //Выводим сообщение - нет данных от сервера
                 }
@@ -54,6 +55,6 @@ new Vue({
             .catch(error => {
                 console.log('Ошибка чтения данных с сервера.\n', error);
             });
-    },
-})
+    }
+});
 
