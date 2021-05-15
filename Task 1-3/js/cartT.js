@@ -1,7 +1,7 @@
 'use strict';
 
 Vue.component('cart', {
-    props:['prod'],
+    props: ['item'],
     data() {
         return {
             isVisibleCart: false,
@@ -10,7 +10,7 @@ Vue.component('cart', {
             cartGoods: [],      //товары в корзине
             cartUrl: 'getBasket.json',
             imgCartUrl: 'https://fakeimg.pl/70x70/282828/eae0d0/',
-            
+            addToBasket: 'addToBasket.json',
             deleteFromBasket: 'deleteFromBasket.json',
         }
     },
@@ -22,27 +22,7 @@ Vue.component('cart', {
                     console.log(error);
                 })
         },
-        addProduc(product) {
-            this.getJson(`${API + this.addToBasket}`)
-                .then(data => {
-                    if (data.result === 1) {
-                        if (data.result === 1) {
-                            let findElement = this.TcartGoods.find(prod => { return prod.id_product === +product.id_product });
-                            if (findElement) {
-                                console.log('такой товар есть');
-                                findElement.quantity += 1;
-                                this.totalPrice();
-                                this.cartBadge = this.TcartGoods.length;
-                            } else {
-                                console.log('такого товара нет');
-                                this.TcartGoods.push({ ...product, quantity: 1 });
-                                this.totalPrice();
-                                this.cartBadge = this.cartGoods.length;
-                            }
-                        }
-                    }
-                })
-        },
+
         deleteProduct(el) {
             this.getJson(`${API + this.deleteFromBasket}`)
                 .then(data => {
@@ -64,6 +44,28 @@ Vue.component('cart', {
             this.price = this.cartGoods.reduce((accum, curr) => {
                 return accum + curr.price * curr.quantity;
             }, 0);
+        },
+
+        addProduct(product) {
+            this.getJson(`${API + this.addToBasket}`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (data.result === 1) {
+                            let findElement = this.cartGoods.find(prod => { return prod.id_product === +product.id_product });
+                            if (findElement) {
+                                console.log('такой товар есть');
+                                findElement.quantity += 1;
+                                this.totalPrice();
+                                this.cartBadge = this.cartGoods.length;
+                            } else {
+                                console.log('такого товара нет');
+                                this.cartGoods.push({ ...product, quantity: 1 });
+                                this.totalPrice();
+                                this.cartBadge = this.cartGoods.length;
+                            }
+                        }
+                    }
+                })
         },
     },
 

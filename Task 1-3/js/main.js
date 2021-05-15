@@ -11,11 +11,11 @@ new Vue({
     el: '#app',
     data: {
         price: '',
-        product: [],
+        product: {},
         isCatalogEmpty: false,
         imgCatalogUrl: 'https://fakeimg.pl/200x200/282828/eae0d0/',
         catalogUrl: 'catalogData.json',
-        addToBasket: 'addToBasket.json',
+        
         catalogGoods: [],   //товары в каталоге
         TsearchGoods: [],    //найденные товары из компонента Search
         TcartGoods: [],      //найденные товары в корзине
@@ -36,7 +36,7 @@ new Vue({
             this.TcartGoods = data;
         },
         addProduct(item) {
-          this.product = item;  
+            this.$refs.cart.addProduct(item);  //Вызываем метод из компонента 'cart'
         },
     },
 
