@@ -12,10 +12,8 @@ new Vue({
     data: {
         price: '',
         product: {},
-        isCatalogEmpty: false,
         imgCatalogUrl: 'https://fakeimg.pl/200x200/282828/eae0d0/',
         catalogUrl: 'catalogData.json',
-        
         catalogGoods: [],   //товары в каталоге
         TsearchGoods: [],    //найденные товары из компонента Search
         TcartGoods: [],      //найденные товары в корзине
@@ -26,7 +24,8 @@ new Vue({
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
-                    console.log(error);
+                    // console.log(error);
+                    this.$refs.error.showError(error);
                 });
         },
         getFromSearch(data) {
@@ -53,7 +52,8 @@ new Vue({
                 }
             })
             .catch(error => {
-                console.log('Ошибка чтения данных с сервера.\n', error);
+                // console.log('Ошибка чтения данных с сервера.\n', error);
+                this.$refs.error.showError(error);
             });
     }
 });

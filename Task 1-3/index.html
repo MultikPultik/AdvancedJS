@@ -38,7 +38,7 @@
                             <p>{{product.price}} &#8381;</p>
                             <button class="by-btn" @click="addProduct(product)" >Добавить в корзину</button>
                         </div>
-                        <h1 v-show="isCatalogEmpty">Нет данных от сервера</h1>
+                        <error ref="error"></error>
                     </div>
                 </div>
             </div>
@@ -55,8 +55,9 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/cartT.js"></script>
+    <script src="js/searchComp.js"></script>
+    <script src="js/cartComp.js"></script>
+    <script src="js/errorComp.js"></script>
     <script src="js/main.js"></script>
 </body>
 
