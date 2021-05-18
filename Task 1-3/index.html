@@ -23,7 +23,7 @@
                 <ul class="d-flex justify-content-between  align-items-center">
                     <li>
                         <input class="form-control mr-sm-2" type="text" placeholder="Поиск товара" aria-label="Search"
-                            @keyup="clickSearch" v-model="search" />
+                             v-model="userSearch">
                     </li>
                     <li @click="isVisibleCart = !isVisibleCart"><a href="#" id="cart"><i class="fa fa-shopping-cart">
                             </i> Cart <span class="badge">{{cartBadge}}</span></a>

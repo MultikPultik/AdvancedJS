@@ -14,7 +14,7 @@ new Vue({
     data: {
         cartBadge: '',
         price: '',
-        search: '',
+        userSearch: '',
         isVisibleCart: false,
         isCatalogEmpty: false,
         imgCatalogUrl: 'https://fakeimg.pl/200x200/282828/eae0d0/',
@@ -25,7 +25,22 @@ new Vue({
         deleteFromBasket: 'deleteFromBasket.json',
         catalogGoods: [],   //товары в каталоге
         cartGoods: [],      //товары в корзине
-        searchGoods: [],    //найденные товары
+    },
+    computed: {
+        //найденные товары
+        searchGoods: {
+            get: function(){
+                return this.catalogGoods.filter(el => {
+                    let s = new RegExp(this.userSearch, "gim");
+                    return (s.test(el.product_name));
+                })
+            },
+            //TODO.....
+            //Без сеттера Vue выдает предупреждение об отстутствии сеттера. Не нашел как устранить этот недостаток.
+            set: function(){
+
+            }
+        }
     },
     methods: {
         getJson(url) {
@@ -34,9 +49,6 @@ new Vue({
                 .catch(error => {
                     console.log(error);
                 })
-        },
-        clickSearch() {
-            this.searchGoods = this.searchProduct(this.search);
         },
         addProduct(product) {
             this.getJson(`${API + this.addToBasket}`)
@@ -60,12 +72,7 @@ new Vue({
                 })
 
         },
-        searchProduct(str) {
-            return this.catalogGoods.filter(el => {
-                let s = new RegExp(str, "gim");
-                return (s.test(el.product_name));
-            })
-        },
+
         deleteProduct(el) {
             this.getJson(`${API + this.deleteFromBasket}`)
                 .then(data => {
